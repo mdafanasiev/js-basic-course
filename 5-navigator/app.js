@@ -1,6 +1,6 @@
 const language = prompt("Введите язык, на котором хотите получить приветствие");
 
-switch (language) {
+switch (language.toLowerCase()) {
     case "ru":
         console.log("Здравствуйте!");
         break;
