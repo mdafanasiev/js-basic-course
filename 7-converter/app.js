@@ -6,7 +6,7 @@ function convertInitialCurrencyToTarget(
     initialCurrency = initialCurrency.toLowerCase();
     targetCurrency = targetCurrency.toLowerCase();
 
-    if (!isConvertableCurrencies(new Array(initialCurrency, targetCurrency)))
+    if (!isConvertableCurrencies([initialCurrency, targetCurrency]))
         return null;
 
     const RubInDollar = 100;
