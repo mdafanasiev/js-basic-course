@@ -1,16 +1,28 @@
 function crypto(password) {
-    if (!(typeof password === String) || !(password.length > 0)) return false;
+    if (!(typeof password === "string") || password.length < 6) return false;
     const passSymbols = password.split("");
-    const passCodes = passSymbols.map((s) => s.charCodeAt(0));
-    const cryptoPassLeft = passCodes
-        .filter((code) => code % 2)
-        .map((code) => String.fromCharCode(code));
-    const cryptoPassRight = passCodes
-        .filter((code) => !(code % 2))
-        .map((code) => String.fromCharCode(code));
-    return cryptoPassLeft.concat(cryptoPassRight).join("");
+    const midElementIndex = Math.ceil(passSymbols.length / 2);
+    const passSymbolsLeft = passSymbols.slice(0, midElementIndex);
+    const passSymbolsRight = passSymbols.slice(midElementIndex);
+    handlePasswordHalves(passSymbolsLeft, passSymbolsRight);
+    return passSymbolsLeft.concat(passSymbolsRight).join("");
 }
 
 function check(encodedPassword, inputPassword) {
     return encodedPassword === crypto(inputPassword);
+}
+
+function handlePasswordHalves(passSymbolsLeft, passSymbolsRight) {
+    midRightIndex = Math.floor(passSymbolsRight.length / 2);
+    [passSymbolsLeft[0], passSymbolsRight[midRightIndex]] = [
+        passSymbolsRight[midRightIndex],
+        passSymbolsLeft[0],
+    ];
+    [
+        passSymbolsLeft[passSymbolsLeft.length - 1],
+        passSymbolsRight[passSymbolsRight.length - 1],
+    ] = [
+        passSymbolsRight[passSymbolsRight.length - 1],
+        passSymbolsLeft[passSymbolsLeft.length - 1],
+    ];
 }

@@ -17,17 +17,26 @@ function convertInitialCurrencyToTarget(
         case targetCurrency:
             return amountOfMoney;
         case "руб":
-            return targetCurrency === "$"
-                ? amountOfMoney / RubInDollar
-                : amountOfMoney / RubInEuro;
+            switch (targetCurrency) {
+                case "$":
+                    return amountOfMoney / RubInDollar;
+                case "euro":
+                    return amountOfMoney / RubInEuro;
+            }
         case "$":
-            return targetCurrency === "руб"
-                ? amountOfMoney * RubInDollar
-                : amountOfMoney / DollarInEuro;
+            switch (targetCurrency) {
+                case "руб":
+                    return amountOfMoney * RubInDollar;
+                case "euro":
+                    return amountOfMoney / DollarInEuro;
+            }
         case "euro":
-            return targetCurrency === "руб"
-                ? amountOfMoney * RubInEuro
-                : amountOfMoney * DollarInEuro;
+            switch (targetCurrency) {
+                case "руб":
+                    return amountOfMoney * RubInEuro;
+                case "$":
+                    return amountOfMoney * DollarInEuro;
+            }
     }
 }
 

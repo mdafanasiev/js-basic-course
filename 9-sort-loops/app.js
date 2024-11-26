@@ -1,15 +1,13 @@
 // isAsc - параметр, для указания порядка сортировки. Значение true - по возрастанию, false - по убыванию.
 function sortArray(inputArray, isAsc = true) {
-    for (let i = 0; i < inputArray.length; i++)
-        for (let j = 0; j < inputArray.length - i; j++) {
-            if (sortOrderCondition(inputArray[j], inputArray[j + 1], isAsc)) {
-                [inputArray[j + 1], inputArray[j]] = [
-                    inputArray[j],
-                    inputArray[j + 1],
-                ];
+    const array = [...inputArray];
+    for (let i = 0; i < array.length; i++)
+        for (let j = 0; j < array.length - i; j++) {
+            if (sortOrderCondition(array[j], array[j + 1], isAsc)) {
+                [array[j + 1], array[j]] = [array[j], array[j + 1]];
             }
         }
-    return inputArray;
+    return array;
 }
 
 // Определяем условие относительно значения порядка сортировки
