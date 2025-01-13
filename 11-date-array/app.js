@@ -18,9 +18,7 @@
 
 За единый формат примем DD-MM-YY*/
 function correctDates(inputArr) {
-    return inputArr
-        .filter((el) => isValidDate(el))
-        .map((date) => dateToRightFormat(date));
+    return inputArr.filter(isValidDate).map(dateToRightFormat);
 }
 
 function isValidDate(date) {

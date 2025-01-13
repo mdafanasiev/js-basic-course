@@ -27,11 +27,17 @@ function isNumericalBlock(block) {
 function lunaAlgo(numbersArray) {
     return !(
         numbersArray
-            .map((num, i) => num + ((((i + 1) % 2) * 2) % 9))
+            .map((num, i) => {
+                if (i % 2 == 0) return num * 2 > 9 ? num * 2 - 9 : num * 2;
+                else return num;
+            })
             .reduce((accumulator, currentValue) => {
                 return accumulator + currentValue;
             }, 0) % 10
     );
 }
 
-console.log(isCardNumberCorrect("4561-1213-4367-2612"));
+console.log(isCardNumberCorrect("234s834503458353"));
+console.log(isCardNumberCorrect("2342834503458353"));
+console.log(isCardNumberCorrect("4561-2612-1234-5464"));
+console.log(isCardNumberCorrect("4561-2612-1534-5464"));
