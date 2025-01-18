@@ -10,10 +10,10 @@ function queryString(queryObj) {
 
     let currCount = 0;
     for (const [key, value] of queryKeyValues) {
-        currCount++;
         if (!hasValidType(value)) {
             continue;
         } else {
+            currCount++;
             queryStr += `${currCount == 1 ? "" : "&"}${key}=${value}`;
         }
     }
@@ -37,4 +37,21 @@ const queryStr2 = queryString({
     },
     name: "Mih",
 });
-console.log(queryStr1);
+console.log(queryStr2);
+
+const queryStr3 = queryString({
+    get3: function () {
+        return 3;
+    },
+    val: true,
+});
+console.log(queryStr3);
+
+const queryStr4 = queryString({
+    salary: 500000,
+    print4: function () {
+        console.log(4);
+    },
+    isHuman: false,
+});
+console.log(queryStr4);
