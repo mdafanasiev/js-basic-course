@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Calculator</title>
+        <link rel="stylesheet" href="./styles.css" />
+        <script src="./app.js"></script>
+    </head>
+    <body>
+        <div class="calc_area">
+            <h1>Calculator</h1>
+            <div class="calc_area_inputs">
+                <input
+                    type="text"
+                    class="operand"
+                    placeholder="Введите число..."
+                />
+                <span id="operation"></span>
+                <input
+                    type="text"
+                    class="operand"
+                    placeholder="Введите число..."
+                />
+            </div>
+            <div class="operations_container">
+                <button class="op" onclick="plus()">+</button>
+                <button class="op" onclick="minus()">-</button>
+                <button class="op" onclick="mult()">*</button>
+                <button class="op" onclick="divide()">/</button>
+            </div>
+            <div class="result_hidden">
+                Результат
+                <p id="result_value"></p>
+            </div>
+        </div>
+    </body>
+</html>
