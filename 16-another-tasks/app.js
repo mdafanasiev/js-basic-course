@@ -2,13 +2,13 @@
 
 const ToDoList = {
     tasks: [],
+    lastID: 0,
     addTask(taskData) {
-        this.sortTasks({ field: "id", method: "DESC" });
         const newTask = {
             ...taskData,
-            id: this.tasks.length > 0 ? this.tasks[0].id + 1 : 0,
+            id: ++this.lastID,
         };
-        this.tasks.unshift(newTask);
+        this.tasks.push(newTask);
     },
     removeTask(id) {
         this.tasks = this.tasks.filter((task) => task.id != id);
@@ -17,8 +17,8 @@ const ToDoList = {
     updateTask(id, newTaskData) {
         const task = this.tasks.find((task) => task.id === id);
         if (task) {
-            for (const [key, value] of newTaskData) {
-                if (task.has) task[key] = value;
+            for (const [key, value] of Object.entries(newTaskData)) {
+                task[key] = value;
             }
         }
     },
@@ -39,26 +39,30 @@ const ToDoList = {
 };
 
 const newTaskManager = {
-    tasks: [
-        {
-            id: 1,
-            name: "тест",
-            description: "описание",
-            order: 0,
-        },
-    ],
+    tasks: [],
+    lastID: 0,
 };
 
-const expandTaskManager = function () {
-    for (const [key, value] of Object.entries(ToDoList)) {
-        if (typeof value === "function")
-            newTaskManager[key] = value.bind(newTaskManager);
-        else newTaskManager[key] = value;
-    }
-};
+const task1 = { title: "Добавленная задача 1", priority: 5 };
+const task2 = { title: "Добавленная задача 2", priority: 2 };
+const task3 = { title: "Добавленная задача 3", priority: 4 };
+const task4 = { title: "Добавленная задача 4", priority: 8 };
 
-expandTaskManager();
-newTaskManager.addTask({ name: "тест", description: "описание", order: 0 });
-newTaskManager.addTask({ title: "Добавленная задача 2", priority: 3 });
-newTaskManager.removeTask(0);
-console.dir(newTaskManager);
+const newManagerAddTask = ToDoList.addTask.bind(newTaskManager);
+newManagerAddTask(task1);
+ToDoList.addTask.call(newTaskManager, task2);
+ToDoList.addTask.apply(newTaskManager, [task3]);
+const newManagerAddTask4 = ToDoList.addTask.bind(newTaskManager, task4);
+newManagerAddTask4();
+ToDoList.removeTask.call(newTaskManager, 3);
+ToDoList.updateTask.apply(newTaskManager, [
+    4,
+    { title: "4 задача", priority: 7 },
+]);
+const newManagerSort = ToDoList.sortTasks.bind(newTaskManager, {
+    field: "priority",
+    method: "DESC",
+});
+
+newManagerSort();
+ToDoList.printTasks.call(newTaskManager);

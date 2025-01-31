@@ -1,16 +1,16 @@
+document
+    .querySelector(".operations_container")
+    .addEventListener("click", (e) => {
+        if (e.target.tagName !== "BUTTON") return;
+        const operation = e.target;
+        evaluate(operations[operation.getAttribute("operator")]);
+    });
+
 const operations = {
-    plus(op1, op2) {
-        return op1 + op2;
-    },
-    minus(op1, op2) {
-        return op1 - op2;
-    },
-    mult(op1, op2) {
-        return op1 * op2;
-    },
-    div(op1, op2) {
-        return op2 === 0 ? NaN : op1 / op2;
-    },
+    "+": (op1, op2) => op1 + op2,
+    "-": (op1, op2) => op1 - op2,
+    "*": (op1, op2) => op1 * op2,
+    "/": (op1, op2) => (op2 === 0 ? NaN : op1 / op2),
 };
 
 const clearInputs = function () {
@@ -27,22 +27,6 @@ const showResult = function (result) {
     const resultTextField = document.getElementById("result_value");
     resultTextField.innerText = String(result);
 };
-
-function plus() {
-    evaluate(operations.plus);
-}
-
-function minus() {
-    evaluate(operations.minus);
-}
-
-function mult() {
-    evaluate(operations.mult);
-}
-
-function divide() {
-    evaluate(operations.div);
-}
 
 function evaluate(operation) {
     const [operand1, operand2] = document.getElementsByClassName("operand");
