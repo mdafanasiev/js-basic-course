@@ -1,0 +1,48 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+}
+.calc_area {
+    display: flex;
+    margin: 0 auto;
+    border: 1px solid black;
+    column-gap: 20px;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    max-width: 700px;
+    margin-top: 10%;
+    min-height: 500px;
+    background-color: bisque;
+}
+
+.calc_area_inputs {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    row-gap: 30px;
+    width: 200px;
+    justify-content: center;
+}
+
+.operations_container {
+    display: flex;
+    max-width: 100px;
+    gap: 3px;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.op {
+    width: 70px;
+    height: 50px;
+    font-size: large;
+}
+
+.result_hidden {
+    display: none;
+}
+
+.result_show {
+    display: block;
+}
